@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "github.com/Izames/DnD-Auth-Proto/proto/DnD;DnD";
+
+package DnD;
+
+service UserService {
+  rpc Auth (AuthRequest) returns (AuthResponse);
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc UpdateUser (EditRequest) returns (EditResponse);
+  rpc DeleteUser (DeleteRequest) returns (DeleteResponse);
+}
+
+message Avatar {
+  bytes avatar = 1;
+  string image_type = 2;
+}
+
+message AuthRequest {
+  string login = 1;
+  string password = 2;
+}
+
+message AuthResponse {
+  string token = 1;
+}
+
+message RegisterRequest {
+  string login = 1;
+  string password = 2;
+  Avatar avatar = 3;
+}
+
+message RegisterResponse {
+  string token = 1;
+}
+
+message EditRequest {
+  string login = 1;
+  string password = 2;
+  Avatar avatar = 3;
+}
+
+message EditResponse {
+  string token = 1;
+}
+
+message DeleteRequest {
+  uint64 user_id = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+  string error = 2;
+}

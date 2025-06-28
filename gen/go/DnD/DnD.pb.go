@@ -275,9 +275,10 @@ func (x *RegisterResponse) GetToken() string {
 
 type EditRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Login         string                 `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Avatar        *Avatar                `protobuf:"bytes,3,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Login         string                 `protobuf:"bytes,2,opt,name=login,proto3" json:"login,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Avatar        *Avatar                `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -310,6 +311,13 @@ func (x *EditRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use EditRequest.ProtoReflect.Descriptor instead.
 func (*EditRequest) Descriptor() ([]byte, []int) {
 	return file_DnD_DnD_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *EditRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
 }
 
 func (x *EditRequest) GetLogin() string {
@@ -379,7 +387,7 @@ func (x *EditResponse) GetToken() string {
 
 type DeleteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,11 +422,11 @@ func (*DeleteRequest) Descriptor() ([]byte, []int) {
 	return file_DnD_DnD_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *DeleteRequest) GetUserId() uint64 {
+func (x *DeleteRequest) GetToken() string {
 	if x != nil {
-		return x.UserId
+		return x.Token
 	}
-	return 0
+	return ""
 }
 
 type DeleteResponse struct {
@@ -492,15 +500,16 @@ const file_DnD_DnD_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12#\n" +
 	"\x06avatar\x18\x03 \x01(\v2\v.DnD.AvatarR\x06avatar\"(\n" +
 	"\x10RegisterResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"d\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"z\n" +
 	"\vEditRequest\x12\x14\n" +
-	"\x05login\x18\x01 \x01(\tR\x05login\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\x12#\n" +
-	"\x06avatar\x18\x03 \x01(\v2\v.DnD.AvatarR\x06avatar\"$\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x14\n" +
+	"\x05login\x18\x02 \x01(\tR\x05login\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12#\n" +
+	"\x06avatar\x18\x04 \x01(\v2\v.DnD.AvatarR\x06avatar\"$\n" +
 	"\fEditResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"(\n" +
-	"\rDeleteRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"@\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"%\n" +
+	"\rDeleteRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"@\n" +
 	"\x0eDeleteResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error2\xdd\x01\n" +

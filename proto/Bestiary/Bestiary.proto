@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+option go_package = "github.com/Izames/DnD-Auth-Proto/proto/Bestiary;Bestiary";
+
+package Bestiary;
+
+//создание бестиария
+message BCRequest {
+  string name = 1;
+  string token = 2;
+  bool public = 3;
+}
+
+message BCResponse {
+  int64 id = 1;
+}
+
+//изменение бестиария
+message BURequest {
+  int64 id = 1;
+  string name = 2;
+  string token = 3;
+  bool public = 4;
+}
+
+message BUResponse {
+  int64 id = 1;
+}
+
+//удаление бестиария
+message BDRequest {
+  int64 id = 1;
+  string token = 2;
+}
+
+message BDResponse {
+  bool success = 1;
+}
+
+message BLoadRequest {
+  int64 id = 1;
+  string token = 2;
+}
+
+message image {
+  bytes monster = 1;
+  string image_type = 2;
+}
+
+message Special {
+  string name = 1;
+  string description = 2;
+  bool view = 3;
+}
+
+//создания монстра в бестиарий
+message MCRequest {
+  int64 bestiaryId = 1;
+  string name = 2;
+  string description = 3;
+  repeated Special special = 4;
+  image image = 5;
+  bool monsterView = 6;
+  bool nameView = 7;
+  bool descriptionView = 8;
+  bool imageView = 9;
+}
+
+message MCResponse {
+  int64 id = 1;
+}
+
+//изменение монстра в бестиарии
+message MURequest {
+  int64 bestiaryId = 1;
+  int64 monsterId= 2;
+  string name = 3;
+  string description = 4;
+  repeated Special special = 5;
+  image image = 6;
+  bool monsterView = 7;
+  bool nameView = 8;
+  bool descriptionView = 9;
+  bool imageView = 10;
+  string token = 11;
+}
+
+message MUResponse {
+  int64 id = 1;
+}
+
+//удаление монстра
+message MDRequest {
+  int64 bestiaryId = 1;
+  int64 monsterId = 2;
+  string token = 3;
+}
+
+message MDResponse {
+  bool success = 1;
+}
+
+message monster {
+  int64 monsterId= 1;
+  string name = 2;
+  string description = 3;
+  repeated Special special = 4;
+  image image = 5;
+  bool monsterView = 6;
+  bool nameView = 7;
+  bool descriptionView = 8;
+  bool imageView = 9;
+}
+
+//получение бестиария
+message BGRequest {
+  int64 bestiaryId = 1;
+  string token = 2;
+}
+
+message BGResponse {
+  string name = 1;
+  bool public = 2;
+  repeated monster monster = 3;
+}

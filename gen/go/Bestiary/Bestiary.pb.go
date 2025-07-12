@@ -336,6 +336,7 @@ func (x *BDResponse) GetSuccess() bool {
 	return false
 }
 
+// добавление бестиария к себе
 type BLoadRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -388,6 +389,50 @@ func (x *BLoadRequest) GetToken() string {
 	return ""
 }
 
+type BLoadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BLoadResponse) Reset() {
+	*x = BLoadResponse{}
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BLoadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BLoadResponse) ProtoMessage() {}
+
+func (x *BLoadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BLoadResponse.ProtoReflect.Descriptor instead.
+func (*BLoadResponse) Descriptor() ([]byte, []int) {
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BLoadResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 type Image struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Monster       []byte                 `protobuf:"bytes,1,opt,name=monster,proto3" json:"monster,omitempty"`
@@ -398,7 +443,7 @@ type Image struct {
 
 func (x *Image) Reset() {
 	*x = Image{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[7]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -410,7 +455,7 @@ func (x *Image) String() string {
 func (*Image) ProtoMessage() {}
 
 func (x *Image) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[7]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -423,7 +468,7 @@ func (x *Image) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Image.ProtoReflect.Descriptor instead.
 func (*Image) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{7}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Image) GetMonster() []byte {
@@ -451,7 +496,7 @@ type Special struct {
 
 func (x *Special) Reset() {
 	*x = Special{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[8]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +508,7 @@ func (x *Special) String() string {
 func (*Special) ProtoMessage() {}
 
 func (x *Special) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[8]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +521,7 @@ func (x *Special) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Special.ProtoReflect.Descriptor instead.
 func (*Special) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{8}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Special) GetName() string {
@@ -518,7 +563,7 @@ type MCRequest struct {
 
 func (x *MCRequest) Reset() {
 	*x = MCRequest{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[9]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -530,7 +575,7 @@ func (x *MCRequest) String() string {
 func (*MCRequest) ProtoMessage() {}
 
 func (x *MCRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[9]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -543,7 +588,7 @@ func (x *MCRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MCRequest.ProtoReflect.Descriptor instead.
 func (*MCRequest) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{9}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *MCRequest) GetBestiaryId() int64 {
@@ -618,7 +663,7 @@ type MCResponse struct {
 
 func (x *MCResponse) Reset() {
 	*x = MCResponse{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[10]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -630,7 +675,7 @@ func (x *MCResponse) String() string {
 func (*MCResponse) ProtoMessage() {}
 
 func (x *MCResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[10]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -643,7 +688,7 @@ func (x *MCResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MCResponse.ProtoReflect.Descriptor instead.
 func (*MCResponse) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{10}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *MCResponse) GetId() int64 {
@@ -673,7 +718,7 @@ type MURequest struct {
 
 func (x *MURequest) Reset() {
 	*x = MURequest{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[11]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -685,7 +730,7 @@ func (x *MURequest) String() string {
 func (*MURequest) ProtoMessage() {}
 
 func (x *MURequest) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[11]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -698,7 +743,7 @@ func (x *MURequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MURequest.ProtoReflect.Descriptor instead.
 func (*MURequest) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{11}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *MURequest) GetBestiaryId() int64 {
@@ -787,7 +832,7 @@ type MUResponse struct {
 
 func (x *MUResponse) Reset() {
 	*x = MUResponse{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[12]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -799,7 +844,7 @@ func (x *MUResponse) String() string {
 func (*MUResponse) ProtoMessage() {}
 
 func (x *MUResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[12]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -812,7 +857,7 @@ func (x *MUResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MUResponse.ProtoReflect.Descriptor instead.
 func (*MUResponse) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{12}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *MUResponse) GetId() int64 {
@@ -834,7 +879,7 @@ type MDRequest struct {
 
 func (x *MDRequest) Reset() {
 	*x = MDRequest{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[13]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -846,7 +891,7 @@ func (x *MDRequest) String() string {
 func (*MDRequest) ProtoMessage() {}
 
 func (x *MDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[13]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -859,7 +904,7 @@ func (x *MDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MDRequest.ProtoReflect.Descriptor instead.
 func (*MDRequest) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{13}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *MDRequest) GetBestiaryId() int64 {
@@ -892,7 +937,7 @@ type MDResponse struct {
 
 func (x *MDResponse) Reset() {
 	*x = MDResponse{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[14]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -904,7 +949,7 @@ func (x *MDResponse) String() string {
 func (*MDResponse) ProtoMessage() {}
 
 func (x *MDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[14]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -917,7 +962,7 @@ func (x *MDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MDResponse.ProtoReflect.Descriptor instead.
 func (*MDResponse) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{14}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *MDResponse) GetSuccess() bool {
@@ -944,7 +989,7 @@ type Monster struct {
 
 func (x *Monster) Reset() {
 	*x = Monster{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[15]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -956,7 +1001,7 @@ func (x *Monster) String() string {
 func (*Monster) ProtoMessage() {}
 
 func (x *Monster) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[15]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -969,7 +1014,7 @@ func (x *Monster) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Monster.ProtoReflect.Descriptor instead.
 func (*Monster) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{15}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Monster) GetMonsterId() int64 {
@@ -1046,7 +1091,7 @@ type BGRequest struct {
 
 func (x *BGRequest) Reset() {
 	*x = BGRequest{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[16]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1058,7 +1103,7 @@ func (x *BGRequest) String() string {
 func (*BGRequest) ProtoMessage() {}
 
 func (x *BGRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[16]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1071,7 +1116,7 @@ func (x *BGRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BGRequest.ProtoReflect.Descriptor instead.
 func (*BGRequest) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{16}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *BGRequest) GetBestiaryId() int64 {
@@ -1099,7 +1144,7 @@ type BGResponse struct {
 
 func (x *BGResponse) Reset() {
 	*x = BGResponse{}
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[17]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1111,7 +1156,7 @@ func (x *BGResponse) String() string {
 func (*BGResponse) ProtoMessage() {}
 
 func (x *BGResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_Bestiary_Bestiary_proto_msgTypes[17]
+	mi := &file_Bestiary_Bestiary_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1124,7 +1169,7 @@ func (x *BGResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BGResponse.ProtoReflect.Descriptor instead.
 func (*BGResponse) Descriptor() ([]byte, []int) {
-	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{17}
+	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *BGResponse) GetName() string {
@@ -1176,7 +1221,9 @@ const file_Bestiary_Bestiary_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"4\n" +
 	"\fBLoadRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token\"@\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\")\n" +
+	"\rBLoadResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"@\n" +
 	"\x05image\x12\x18\n" +
 	"\amonster\x18\x01 \x01(\fR\amonster\x12\x1d\n" +
 	"\n" +
@@ -1246,7 +1293,16 @@ const file_Bestiary_Bestiary_proto_rawDesc = "" +
 	"BGResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06public\x18\x02 \x01(\bR\x06public\x12+\n" +
-	"\amonster\x18\x03 \x03(\v2\x11.Bestiary.monsterR\amonsterB:Z8github.com/Izames/DnD-Auth-Proto/proto/Bestiary;Bestiaryb\x06proto3"
+	"\amonster\x18\x03 \x03(\v2\x11.Bestiary.monsterR\amonster2\xf7\x03\n" +
+	"\x0fBestiaryService\x12;\n" +
+	"\x0eBestiaryCreate\x12\x13.Bestiary.BCRequest\x1a\x14.Bestiary.BCResponse\x12;\n" +
+	"\x0eBestiaryUpdate\x12\x13.Bestiary.BURequest\x1a\x14.Bestiary.BUResponse\x12;\n" +
+	"\x0eBestiaryDelete\x12\x13.Bestiary.BDRequest\x1a\x14.Bestiary.BDResponse\x12?\n" +
+	"\fBestiaryLoad\x12\x16.Bestiary.BLoadRequest\x1a\x17.Bestiary.BLoadResponse\x12:\n" +
+	"\rMonsterCreate\x12\x13.Bestiary.MCRequest\x1a\x14.Bestiary.MCResponse\x12:\n" +
+	"\rMonsterUpdate\x12\x13.Bestiary.MURequest\x1a\x14.Bestiary.MUResponse\x12:\n" +
+	"\rMonsterDelete\x12\x13.Bestiary.MDRequest\x1a\x14.Bestiary.MDResponse\x128\n" +
+	"\vBestiaryGet\x12\x13.Bestiary.BGRequest\x1a\x14.Bestiary.BGResponseB:Z8github.com/Izames/DnD-Auth-Proto/proto/Bestiary;Bestiaryb\x06proto3"
 
 var (
 	file_Bestiary_Bestiary_proto_rawDescOnce sync.Once
@@ -1260,37 +1316,54 @@ func file_Bestiary_Bestiary_proto_rawDescGZIP() []byte {
 	return file_Bestiary_Bestiary_proto_rawDescData
 }
 
-var file_Bestiary_Bestiary_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_Bestiary_Bestiary_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_Bestiary_Bestiary_proto_goTypes = []any{
-	(*BCRequest)(nil),    // 0: Bestiary.BCRequest
-	(*BCResponse)(nil),   // 1: Bestiary.BCResponse
-	(*BURequest)(nil),    // 2: Bestiary.BURequest
-	(*BUResponse)(nil),   // 3: Bestiary.BUResponse
-	(*BDRequest)(nil),    // 4: Bestiary.BDRequest
-	(*BDResponse)(nil),   // 5: Bestiary.BDResponse
-	(*BLoadRequest)(nil), // 6: Bestiary.BLoadRequest
-	(*Image)(nil),        // 7: Bestiary.image
-	(*Special)(nil),      // 8: Bestiary.Special
-	(*MCRequest)(nil),    // 9: Bestiary.MCRequest
-	(*MCResponse)(nil),   // 10: Bestiary.MCResponse
-	(*MURequest)(nil),    // 11: Bestiary.MURequest
-	(*MUResponse)(nil),   // 12: Bestiary.MUResponse
-	(*MDRequest)(nil),    // 13: Bestiary.MDRequest
-	(*MDResponse)(nil),   // 14: Bestiary.MDResponse
-	(*Monster)(nil),      // 15: Bestiary.monster
-	(*BGRequest)(nil),    // 16: Bestiary.BGRequest
-	(*BGResponse)(nil),   // 17: Bestiary.BGResponse
+	(*BCRequest)(nil),     // 0: Bestiary.BCRequest
+	(*BCResponse)(nil),    // 1: Bestiary.BCResponse
+	(*BURequest)(nil),     // 2: Bestiary.BURequest
+	(*BUResponse)(nil),    // 3: Bestiary.BUResponse
+	(*BDRequest)(nil),     // 4: Bestiary.BDRequest
+	(*BDResponse)(nil),    // 5: Bestiary.BDResponse
+	(*BLoadRequest)(nil),  // 6: Bestiary.BLoadRequest
+	(*BLoadResponse)(nil), // 7: Bestiary.BLoadResponse
+	(*Image)(nil),         // 8: Bestiary.image
+	(*Special)(nil),       // 9: Bestiary.Special
+	(*MCRequest)(nil),     // 10: Bestiary.MCRequest
+	(*MCResponse)(nil),    // 11: Bestiary.MCResponse
+	(*MURequest)(nil),     // 12: Bestiary.MURequest
+	(*MUResponse)(nil),    // 13: Bestiary.MUResponse
+	(*MDRequest)(nil),     // 14: Bestiary.MDRequest
+	(*MDResponse)(nil),    // 15: Bestiary.MDResponse
+	(*Monster)(nil),       // 16: Bestiary.monster
+	(*BGRequest)(nil),     // 17: Bestiary.BGRequest
+	(*BGResponse)(nil),    // 18: Bestiary.BGResponse
 }
 var file_Bestiary_Bestiary_proto_depIdxs = []int32{
-	8,  // 0: Bestiary.MCRequest.special:type_name -> Bestiary.Special
-	7,  // 1: Bestiary.MCRequest.image:type_name -> Bestiary.image
-	8,  // 2: Bestiary.MURequest.special:type_name -> Bestiary.Special
-	7,  // 3: Bestiary.MURequest.image:type_name -> Bestiary.image
-	8,  // 4: Bestiary.monster.special:type_name -> Bestiary.Special
-	7,  // 5: Bestiary.monster.image:type_name -> Bestiary.image
-	15, // 6: Bestiary.BGResponse.monster:type_name -> Bestiary.monster
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
+	9,  // 0: Bestiary.MCRequest.special:type_name -> Bestiary.Special
+	8,  // 1: Bestiary.MCRequest.image:type_name -> Bestiary.image
+	9,  // 2: Bestiary.MURequest.special:type_name -> Bestiary.Special
+	8,  // 3: Bestiary.MURequest.image:type_name -> Bestiary.image
+	9,  // 4: Bestiary.monster.special:type_name -> Bestiary.Special
+	8,  // 5: Bestiary.monster.image:type_name -> Bestiary.image
+	16, // 6: Bestiary.BGResponse.monster:type_name -> Bestiary.monster
+	0,  // 7: Bestiary.BestiaryService.BestiaryCreate:input_type -> Bestiary.BCRequest
+	2,  // 8: Bestiary.BestiaryService.BestiaryUpdate:input_type -> Bestiary.BURequest
+	4,  // 9: Bestiary.BestiaryService.BestiaryDelete:input_type -> Bestiary.BDRequest
+	6,  // 10: Bestiary.BestiaryService.BestiaryLoad:input_type -> Bestiary.BLoadRequest
+	10, // 11: Bestiary.BestiaryService.MonsterCreate:input_type -> Bestiary.MCRequest
+	12, // 12: Bestiary.BestiaryService.MonsterUpdate:input_type -> Bestiary.MURequest
+	14, // 13: Bestiary.BestiaryService.MonsterDelete:input_type -> Bestiary.MDRequest
+	17, // 14: Bestiary.BestiaryService.BestiaryGet:input_type -> Bestiary.BGRequest
+	1,  // 15: Bestiary.BestiaryService.BestiaryCreate:output_type -> Bestiary.BCResponse
+	3,  // 16: Bestiary.BestiaryService.BestiaryUpdate:output_type -> Bestiary.BUResponse
+	5,  // 17: Bestiary.BestiaryService.BestiaryDelete:output_type -> Bestiary.BDResponse
+	7,  // 18: Bestiary.BestiaryService.BestiaryLoad:output_type -> Bestiary.BLoadResponse
+	11, // 19: Bestiary.BestiaryService.MonsterCreate:output_type -> Bestiary.MCResponse
+	13, // 20: Bestiary.BestiaryService.MonsterUpdate:output_type -> Bestiary.MUResponse
+	15, // 21: Bestiary.BestiaryService.MonsterDelete:output_type -> Bestiary.MDResponse
+	18, // 22: Bestiary.BestiaryService.BestiaryGet:output_type -> Bestiary.BGResponse
+	15, // [15:23] is the sub-list for method output_type
+	7,  // [7:15] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -1307,9 +1380,9 @@ func file_Bestiary_Bestiary_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_Bestiary_Bestiary_proto_rawDesc), len(file_Bestiary_Bestiary_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   19,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_Bestiary_Bestiary_proto_goTypes,
 		DependencyIndexes: file_Bestiary_Bestiary_proto_depIdxs,

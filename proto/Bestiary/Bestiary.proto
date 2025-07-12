@@ -4,6 +4,17 @@ option go_package = "github.com/Izames/DnD-Auth-Proto/proto/Bestiary;Bestiary";
 
 package Bestiary;
 
+service BestiaryService {
+  rpc BestiaryCreate (BCRequest) returns (BCResponse);
+  rpc BestiaryUpdate (BURequest) returns (BUResponse);
+  rpc BestiaryDelete (BDRequest) returns (BDResponse);
+  rpc BestiaryLoad (BLoadRequest) returns (BLoadResponse);
+  rpc MonsterCreate (MCRequest) returns (MCResponse);
+  rpc MonsterUpdate (MURequest) returns (MUResponse);
+  rpc MonsterDelete (MDRequest) returns (MDResponse);
+  rpc BestiaryGet (BGRequest) returns (BGResponse);
+}
+
 //создание бестиария
 message BCRequest {
   string name = 1;
@@ -37,9 +48,14 @@ message BDResponse {
   bool success = 1;
 }
 
+//добавление бестиария к себе
 message BLoadRequest {
   int64 id = 1;
   string token = 2;
+}
+
+message BLoadResponse {
+  bool success = 1;
 }
 
 message image {

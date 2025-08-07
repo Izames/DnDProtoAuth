@@ -186,29 +186,30 @@ func (x *Bestiary) GetUpdateDate() string {
 }
 
 // поиск бестиариев
-type BLRequest struct {
+type FindBestiaries struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	UserLogin     string                 `protobuf:"bytes,2,opt,name=userLogin,proto3" json:"userLogin,omitempty"`
 	SortBy        string                 `protobuf:"bytes,3,opt,name=sortBy,proto3" json:"sortBy,omitempty"`
+	Token         string                 `protobuf:"bytes,4,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BLRequest) Reset() {
-	*x = BLRequest{}
+func (x *FindBestiaries) Reset() {
+	*x = FindBestiaries{}
 	mi := &file_Bestiary_Bestiary_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BLRequest) String() string {
+func (x *FindBestiaries) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BLRequest) ProtoMessage() {}
+func (*FindBestiaries) ProtoMessage() {}
 
-func (x *BLRequest) ProtoReflect() protoreflect.Message {
+func (x *FindBestiaries) ProtoReflect() protoreflect.Message {
 	mi := &file_Bestiary_Bestiary_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -220,53 +221,60 @@ func (x *BLRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BLRequest.ProtoReflect.Descriptor instead.
-func (*BLRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use FindBestiaries.ProtoReflect.Descriptor instead.
+func (*FindBestiaries) Descriptor() ([]byte, []int) {
 	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *BLRequest) GetName() string {
+func (x *FindBestiaries) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *BLRequest) GetUserLogin() string {
+func (x *FindBestiaries) GetUserLogin() string {
 	if x != nil {
 		return x.UserLogin
 	}
 	return ""
 }
 
-func (x *BLRequest) GetSortBy() string {
+func (x *FindBestiaries) GetSortBy() string {
 	if x != nil {
 		return x.SortBy
 	}
 	return ""
 }
 
-type BLResponse struct {
+func (x *FindBestiaries) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type SortedBestiaries struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Bestiaries    []*Bestiary            `protobuf:"bytes,1,rep,name=bestiaries,proto3" json:"bestiaries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BLResponse) Reset() {
-	*x = BLResponse{}
+func (x *SortedBestiaries) Reset() {
+	*x = SortedBestiaries{}
 	mi := &file_Bestiary_Bestiary_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BLResponse) String() string {
+func (x *SortedBestiaries) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BLResponse) ProtoMessage() {}
+func (*SortedBestiaries) ProtoMessage() {}
 
-func (x *BLResponse) ProtoReflect() protoreflect.Message {
+func (x *SortedBestiaries) ProtoReflect() protoreflect.Message {
 	mi := &file_Bestiary_Bestiary_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -278,12 +286,12 @@ func (x *BLResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BLResponse.ProtoReflect.Descriptor instead.
-func (*BLResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SortedBestiaries.ProtoReflect.Descriptor instead.
+func (*SortedBestiaries) Descriptor() ([]byte, []int) {
 	return file_Bestiary_Bestiary_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *BLResponse) GetBestiaries() []*Bestiary {
+func (x *SortedBestiaries) GetBestiaries() []*Bestiary {
 	if x != nil {
 		return x.Bestiaries
 	}
@@ -1419,13 +1427,13 @@ const file_Bestiary_Bestiary_proto_rawDesc = "" +
 	"\tdownloads\x18\x03 \x01(\x05R\tdownloads\x12\x1e\n" +
 	"\n" +
 	"updateDate\x18\x04 \x01(\tR\n" +
-	"updateDate\"U\n" +
-	"\tBLRequest\x12\x12\n" +
+	"updateDate\"p\n" +
+	"\x0eFindBestiaries\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
 	"\tuserLogin\x18\x02 \x01(\tR\tuserLogin\x12\x16\n" +
-	"\x06sortBy\x18\x03 \x01(\tR\x06sortBy\"@\n" +
-	"\n" +
-	"BLResponse\x122\n" +
+	"\x06sortBy\x18\x03 \x01(\tR\x06sortBy\x12\x14\n" +
+	"\x05token\x18\x04 \x01(\tR\x05token\"F\n" +
+	"\x10SortedBestiaries\x122\n" +
 	"\n" +
 	"bestiaries\x18\x01 \x03(\v2\x12.Bestiary.BestiaryR\n" +
 	"bestiaries\"5\n" +
@@ -1519,11 +1527,12 @@ const file_Bestiary_Bestiary_proto_rawDesc = "" +
 	"BGResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06public\x18\x02 \x01(\bR\x06public\x12+\n" +
-	"\amonster\x18\x03 \x03(\v2\x11.Bestiary.monsterR\amonster2\xfc\x04\n" +
-	"\x0fBestiaryService\x129\n" +
-	"\fBestiaryList\x12\x13.Bestiary.BLRequest\x1a\x14.Bestiary.BLResponse\x128\n" +
-	"\vBestiaryGet\x12\x13.Bestiary.BGRequest\x1a\x14.Bestiary.BGResponse\x12>\n" +
-	"\x0eBestiaryCreate\x12\x13.Bestiary.BCRequest\x1a\x17.Bestiary.EmptyResponse\x12;\n" +
+	"\amonster\x18\x03 \x03(\v2\x11.Bestiary.monsterR\amonster2\xcd\x05\n" +
+	"\x0fBestiaryService\x12>\n" +
+	"\x0eBestiaryCreate\x12\x13.Bestiary.BCRequest\x1a\x17.Bestiary.EmptyResponse\x12D\n" +
+	"\fBestiaryList\x12\x18.Bestiary.FindBestiaries\x1a\x1a.Bestiary.SortedBestiaries\x12D\n" +
+	"\fUserBestiary\x12\x18.Bestiary.FindBestiaries\x1a\x1a.Bestiary.SortedBestiaries\x128\n" +
+	"\vBestiaryGet\x12\x13.Bestiary.BGRequest\x1a\x14.Bestiary.BGResponse\x12;\n" +
 	"\x0eBestiaryUpdate\x12\x13.Bestiary.BURequest\x1a\x14.Bestiary.BUResponse\x12;\n" +
 	"\x0eBestiaryDelete\x12\x13.Bestiary.BDRequest\x1a\x14.Bestiary.BDResponse\x12E\n" +
 	"\x14BestiaryPublicChange\x12\x14.Bestiary.BPCRequest\x1a\x17.Bestiary.EmptyResponse\x12?\n" +
@@ -1546,32 +1555,32 @@ func file_Bestiary_Bestiary_proto_rawDescGZIP() []byte {
 
 var file_Bestiary_Bestiary_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_Bestiary_Bestiary_proto_goTypes = []any{
-	(*BPCRequest)(nil),    // 0: Bestiary.BPCRequest
-	(*EmptyResponse)(nil), // 1: Bestiary.EmptyResponse
-	(*Bestiary)(nil),      // 2: Bestiary.Bestiary
-	(*BLRequest)(nil),     // 3: Bestiary.BLRequest
-	(*BLResponse)(nil),    // 4: Bestiary.BLResponse
-	(*BCRequest)(nil),     // 5: Bestiary.BCRequest
-	(*BURequest)(nil),     // 6: Bestiary.BURequest
-	(*BUResponse)(nil),    // 7: Bestiary.BUResponse
-	(*BDRequest)(nil),     // 8: Bestiary.BDRequest
-	(*BDResponse)(nil),    // 9: Bestiary.BDResponse
-	(*BLoadRequest)(nil),  // 10: Bestiary.BLoadRequest
-	(*BLoadResponse)(nil), // 11: Bestiary.BLoadResponse
-	(*Image)(nil),         // 12: Bestiary.image
-	(*Special)(nil),       // 13: Bestiary.Special
-	(*MCRequest)(nil),     // 14: Bestiary.MCRequest
-	(*MCResponse)(nil),    // 15: Bestiary.MCResponse
-	(*MURequest)(nil),     // 16: Bestiary.MURequest
-	(*MUResponse)(nil),    // 17: Bestiary.MUResponse
-	(*MDRequest)(nil),     // 18: Bestiary.MDRequest
-	(*MDResponse)(nil),    // 19: Bestiary.MDResponse
-	(*Monster)(nil),       // 20: Bestiary.monster
-	(*BGRequest)(nil),     // 21: Bestiary.BGRequest
-	(*BGResponse)(nil),    // 22: Bestiary.BGResponse
+	(*BPCRequest)(nil),       // 0: Bestiary.BPCRequest
+	(*EmptyResponse)(nil),    // 1: Bestiary.EmptyResponse
+	(*Bestiary)(nil),         // 2: Bestiary.Bestiary
+	(*FindBestiaries)(nil),   // 3: Bestiary.FindBestiaries
+	(*SortedBestiaries)(nil), // 4: Bestiary.SortedBestiaries
+	(*BCRequest)(nil),        // 5: Bestiary.BCRequest
+	(*BURequest)(nil),        // 6: Bestiary.BURequest
+	(*BUResponse)(nil),       // 7: Bestiary.BUResponse
+	(*BDRequest)(nil),        // 8: Bestiary.BDRequest
+	(*BDResponse)(nil),       // 9: Bestiary.BDResponse
+	(*BLoadRequest)(nil),     // 10: Bestiary.BLoadRequest
+	(*BLoadResponse)(nil),    // 11: Bestiary.BLoadResponse
+	(*Image)(nil),            // 12: Bestiary.image
+	(*Special)(nil),          // 13: Bestiary.Special
+	(*MCRequest)(nil),        // 14: Bestiary.MCRequest
+	(*MCResponse)(nil),       // 15: Bestiary.MCResponse
+	(*MURequest)(nil),        // 16: Bestiary.MURequest
+	(*MUResponse)(nil),       // 17: Bestiary.MUResponse
+	(*MDRequest)(nil),        // 18: Bestiary.MDRequest
+	(*MDResponse)(nil),       // 19: Bestiary.MDResponse
+	(*Monster)(nil),          // 20: Bestiary.monster
+	(*BGRequest)(nil),        // 21: Bestiary.BGRequest
+	(*BGResponse)(nil),       // 22: Bestiary.BGResponse
 }
 var file_Bestiary_Bestiary_proto_depIdxs = []int32{
-	2,  // 0: Bestiary.BLResponse.bestiaries:type_name -> Bestiary.Bestiary
+	2,  // 0: Bestiary.SortedBestiaries.bestiaries:type_name -> Bestiary.Bestiary
 	13, // 1: Bestiary.MCRequest.special:type_name -> Bestiary.Special
 	12, // 2: Bestiary.MCRequest.image:type_name -> Bestiary.image
 	13, // 3: Bestiary.MURequest.special:type_name -> Bestiary.Special
@@ -1579,28 +1588,30 @@ var file_Bestiary_Bestiary_proto_depIdxs = []int32{
 	13, // 5: Bestiary.monster.special:type_name -> Bestiary.Special
 	12, // 6: Bestiary.monster.image:type_name -> Bestiary.image
 	20, // 7: Bestiary.BGResponse.monster:type_name -> Bestiary.monster
-	3,  // 8: Bestiary.BestiaryService.BestiaryList:input_type -> Bestiary.BLRequest
-	21, // 9: Bestiary.BestiaryService.BestiaryGet:input_type -> Bestiary.BGRequest
-	5,  // 10: Bestiary.BestiaryService.BestiaryCreate:input_type -> Bestiary.BCRequest
-	6,  // 11: Bestiary.BestiaryService.BestiaryUpdate:input_type -> Bestiary.BURequest
-	8,  // 12: Bestiary.BestiaryService.BestiaryDelete:input_type -> Bestiary.BDRequest
-	0,  // 13: Bestiary.BestiaryService.BestiaryPublicChange:input_type -> Bestiary.BPCRequest
-	10, // 14: Bestiary.BestiaryService.BestiaryLoad:input_type -> Bestiary.BLoadRequest
-	14, // 15: Bestiary.BestiaryService.MonsterCreate:input_type -> Bestiary.MCRequest
-	16, // 16: Bestiary.BestiaryService.MonsterUpdate:input_type -> Bestiary.MURequest
-	18, // 17: Bestiary.BestiaryService.MonsterDelete:input_type -> Bestiary.MDRequest
-	4,  // 18: Bestiary.BestiaryService.BestiaryList:output_type -> Bestiary.BLResponse
-	22, // 19: Bestiary.BestiaryService.BestiaryGet:output_type -> Bestiary.BGResponse
-	1,  // 20: Bestiary.BestiaryService.BestiaryCreate:output_type -> Bestiary.EmptyResponse
-	7,  // 21: Bestiary.BestiaryService.BestiaryUpdate:output_type -> Bestiary.BUResponse
-	9,  // 22: Bestiary.BestiaryService.BestiaryDelete:output_type -> Bestiary.BDResponse
-	1,  // 23: Bestiary.BestiaryService.BestiaryPublicChange:output_type -> Bestiary.EmptyResponse
-	11, // 24: Bestiary.BestiaryService.BestiaryLoad:output_type -> Bestiary.BLoadResponse
-	15, // 25: Bestiary.BestiaryService.MonsterCreate:output_type -> Bestiary.MCResponse
-	17, // 26: Bestiary.BestiaryService.MonsterUpdate:output_type -> Bestiary.MUResponse
-	19, // 27: Bestiary.BestiaryService.MonsterDelete:output_type -> Bestiary.MDResponse
-	18, // [18:28] is the sub-list for method output_type
-	8,  // [8:18] is the sub-list for method input_type
+	5,  // 8: Bestiary.BestiaryService.BestiaryCreate:input_type -> Bestiary.BCRequest
+	3,  // 9: Bestiary.BestiaryService.BestiaryList:input_type -> Bestiary.FindBestiaries
+	3,  // 10: Bestiary.BestiaryService.UserBestiary:input_type -> Bestiary.FindBestiaries
+	21, // 11: Bestiary.BestiaryService.BestiaryGet:input_type -> Bestiary.BGRequest
+	6,  // 12: Bestiary.BestiaryService.BestiaryUpdate:input_type -> Bestiary.BURequest
+	8,  // 13: Bestiary.BestiaryService.BestiaryDelete:input_type -> Bestiary.BDRequest
+	0,  // 14: Bestiary.BestiaryService.BestiaryPublicChange:input_type -> Bestiary.BPCRequest
+	10, // 15: Bestiary.BestiaryService.BestiaryLoad:input_type -> Bestiary.BLoadRequest
+	14, // 16: Bestiary.BestiaryService.MonsterCreate:input_type -> Bestiary.MCRequest
+	16, // 17: Bestiary.BestiaryService.MonsterUpdate:input_type -> Bestiary.MURequest
+	18, // 18: Bestiary.BestiaryService.MonsterDelete:input_type -> Bestiary.MDRequest
+	1,  // 19: Bestiary.BestiaryService.BestiaryCreate:output_type -> Bestiary.EmptyResponse
+	4,  // 20: Bestiary.BestiaryService.BestiaryList:output_type -> Bestiary.SortedBestiaries
+	4,  // 21: Bestiary.BestiaryService.UserBestiary:output_type -> Bestiary.SortedBestiaries
+	22, // 22: Bestiary.BestiaryService.BestiaryGet:output_type -> Bestiary.BGResponse
+	7,  // 23: Bestiary.BestiaryService.BestiaryUpdate:output_type -> Bestiary.BUResponse
+	9,  // 24: Bestiary.BestiaryService.BestiaryDelete:output_type -> Bestiary.BDResponse
+	1,  // 25: Bestiary.BestiaryService.BestiaryPublicChange:output_type -> Bestiary.EmptyResponse
+	11, // 26: Bestiary.BestiaryService.BestiaryLoad:output_type -> Bestiary.BLoadResponse
+	15, // 27: Bestiary.BestiaryService.MonsterCreate:output_type -> Bestiary.MCResponse
+	17, // 28: Bestiary.BestiaryService.MonsterUpdate:output_type -> Bestiary.MUResponse
+	19, // 29: Bestiary.BestiaryService.MonsterDelete:output_type -> Bestiary.MDResponse
+	19, // [19:30] is the sub-list for method output_type
+	8,  // [8:19] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name

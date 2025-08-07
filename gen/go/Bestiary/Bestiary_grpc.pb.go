@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BestiaryService_BestiaryList_FullMethodName         = "/Bestiary.BestiaryService/BestiaryList"
-	BestiaryService_BestiaryGet_FullMethodName          = "/Bestiary.BestiaryService/BestiaryGet"
 	BestiaryService_BestiaryCreate_FullMethodName       = "/Bestiary.BestiaryService/BestiaryCreate"
+	BestiaryService_BestiaryList_FullMethodName         = "/Bestiary.BestiaryService/BestiaryList"
+	BestiaryService_UserBestiary_FullMethodName         = "/Bestiary.BestiaryService/UserBestiary"
+	BestiaryService_BestiaryGet_FullMethodName          = "/Bestiary.BestiaryService/BestiaryGet"
 	BestiaryService_BestiaryUpdate_FullMethodName       = "/Bestiary.BestiaryService/BestiaryUpdate"
 	BestiaryService_BestiaryDelete_FullMethodName       = "/Bestiary.BestiaryService/BestiaryDelete"
 	BestiaryService_BestiaryPublicChange_FullMethodName = "/Bestiary.BestiaryService/BestiaryPublicChange"
@@ -35,9 +36,10 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BestiaryServiceClient interface {
-	BestiaryList(ctx context.Context, in *BLRequest, opts ...grpc.CallOption) (*BLResponse, error)
-	BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error)
 	BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	BestiaryList(ctx context.Context, in *FindBestiaries, opts ...grpc.CallOption) (*SortedBestiaries, error)
+	UserBestiary(ctx context.Context, in *FindBestiaries, opts ...grpc.CallOption) (*SortedBestiaries, error)
+	BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error)
 	BestiaryUpdate(ctx context.Context, in *BURequest, opts ...grpc.CallOption) (*BUResponse, error)
 	BestiaryDelete(ctx context.Context, in *BDRequest, opts ...grpc.CallOption) (*BDResponse, error)
 	BestiaryPublicChange(ctx context.Context, in *BPCRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
@@ -55,10 +57,30 @@ func NewBestiaryServiceClient(cc grpc.ClientConnInterface) BestiaryServiceClient
 	return &bestiaryServiceClient{cc}
 }
 
-func (c *bestiaryServiceClient) BestiaryList(ctx context.Context, in *BLRequest, opts ...grpc.CallOption) (*BLResponse, error) {
+func (c *bestiaryServiceClient) BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BLResponse)
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, BestiaryService_BestiaryCreate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bestiaryServiceClient) BestiaryList(ctx context.Context, in *FindBestiaries, opts ...grpc.CallOption) (*SortedBestiaries, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SortedBestiaries)
 	err := c.cc.Invoke(ctx, BestiaryService_BestiaryList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bestiaryServiceClient) UserBestiary(ctx context.Context, in *FindBestiaries, opts ...grpc.CallOption) (*SortedBestiaries, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SortedBestiaries)
+	err := c.cc.Invoke(ctx, BestiaryService_UserBestiary_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -69,16 +91,6 @@ func (c *bestiaryServiceClient) BestiaryGet(ctx context.Context, in *BGRequest, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BGResponse)
 	err := c.cc.Invoke(ctx, BestiaryService_BestiaryGet_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *bestiaryServiceClient) BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EmptyResponse)
-	err := c.cc.Invoke(ctx, BestiaryService_BestiaryCreate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -159,9 +171,10 @@ func (c *bestiaryServiceClient) MonsterDelete(ctx context.Context, in *MDRequest
 // All implementations must embed UnimplementedBestiaryServiceServer
 // for forward compatibility.
 type BestiaryServiceServer interface {
-	BestiaryList(context.Context, *BLRequest) (*BLResponse, error)
-	BestiaryGet(context.Context, *BGRequest) (*BGResponse, error)
 	BestiaryCreate(context.Context, *BCRequest) (*EmptyResponse, error)
+	BestiaryList(context.Context, *FindBestiaries) (*SortedBestiaries, error)
+	UserBestiary(context.Context, *FindBestiaries) (*SortedBestiaries, error)
+	BestiaryGet(context.Context, *BGRequest) (*BGResponse, error)
 	BestiaryUpdate(context.Context, *BURequest) (*BUResponse, error)
 	BestiaryDelete(context.Context, *BDRequest) (*BDResponse, error)
 	BestiaryPublicChange(context.Context, *BPCRequest) (*EmptyResponse, error)
@@ -179,14 +192,17 @@ type BestiaryServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBestiaryServiceServer struct{}
 
-func (UnimplementedBestiaryServiceServer) BestiaryList(context.Context, *BLRequest) (*BLResponse, error) {
+func (UnimplementedBestiaryServiceServer) BestiaryCreate(context.Context, *BCRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BestiaryCreate not implemented")
+}
+func (UnimplementedBestiaryServiceServer) BestiaryList(context.Context, *FindBestiaries) (*SortedBestiaries, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryList not implemented")
+}
+func (UnimplementedBestiaryServiceServer) UserBestiary(context.Context, *FindBestiaries) (*SortedBestiaries, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserBestiary not implemented")
 }
 func (UnimplementedBestiaryServiceServer) BestiaryGet(context.Context, *BGRequest) (*BGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryGet not implemented")
-}
-func (UnimplementedBestiaryServiceServer) BestiaryCreate(context.Context, *BCRequest) (*EmptyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BestiaryCreate not implemented")
 }
 func (UnimplementedBestiaryServiceServer) BestiaryUpdate(context.Context, *BURequest) (*BUResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryUpdate not implemented")
@@ -230,8 +246,26 @@ func RegisterBestiaryServiceServer(s grpc.ServiceRegistrar, srv BestiaryServiceS
 	s.RegisterService(&BestiaryService_ServiceDesc, srv)
 }
 
+func _BestiaryService_BestiaryCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BCRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BestiaryServiceServer).BestiaryCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BestiaryService_BestiaryCreate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BestiaryServiceServer).BestiaryCreate(ctx, req.(*BCRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BestiaryService_BestiaryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BLRequest)
+	in := new(FindBestiaries)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -243,7 +277,25 @@ func _BestiaryService_BestiaryList_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BestiaryService_BestiaryList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BestiaryServiceServer).BestiaryList(ctx, req.(*BLRequest))
+		return srv.(BestiaryServiceServer).BestiaryList(ctx, req.(*FindBestiaries))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BestiaryService_UserBestiary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindBestiaries)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BestiaryServiceServer).UserBestiary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BestiaryService_UserBestiary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BestiaryServiceServer).UserBestiary(ctx, req.(*FindBestiaries))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,24 +314,6 @@ func _BestiaryService_BestiaryGet_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BestiaryServiceServer).BestiaryGet(ctx, req.(*BGRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BestiaryService_BestiaryCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BCRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BestiaryServiceServer).BestiaryCreate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BestiaryService_BestiaryCreate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BestiaryServiceServer).BestiaryCreate(ctx, req.(*BCRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -418,16 +452,20 @@ var BestiaryService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BestiaryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "BestiaryCreate",
+			Handler:    _BestiaryService_BestiaryCreate_Handler,
+		},
+		{
 			MethodName: "BestiaryList",
 			Handler:    _BestiaryService_BestiaryList_Handler,
 		},
 		{
-			MethodName: "BestiaryGet",
-			Handler:    _BestiaryService_BestiaryGet_Handler,
+			MethodName: "UserBestiary",
+			Handler:    _BestiaryService_UserBestiary_Handler,
 		},
 		{
-			MethodName: "BestiaryCreate",
-			Handler:    _BestiaryService_BestiaryCreate_Handler,
+			MethodName: "BestiaryGet",
+			Handler:    _BestiaryService_BestiaryGet_Handler,
 		},
 		{
 			MethodName: "BestiaryUpdate",

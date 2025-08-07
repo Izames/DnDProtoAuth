@@ -8,7 +8,7 @@ service BestiaryService {
   rpc BestiaryCreate (BCRequest) returns (EmptyResponse);
   rpc BestiaryList (FindBestiaries) returns (SortedBestiaries);
   rpc UserBestiary (FindBestiaries) returns (SortedBestiaries);
-  rpc BestiaryGet (BGRequest) returns (Bestiary);
+  rpc BestiaryGet (BGRequest) returns (BGResponse);
   rpc BestiaryUpdate (BURequest) returns (BUResponse);
   rpc BestiaryDelete (BDRequest) returns (BDResponse);
   rpc BestiaryPublicChange (BPCRequest) returns (EmptyResponse);

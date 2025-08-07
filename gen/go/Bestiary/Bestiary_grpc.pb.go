@@ -19,28 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BestiaryService_BestiaryCreate_FullMethodName = "/Bestiary.BestiaryService/BestiaryCreate"
-	BestiaryService_BestiaryUpdate_FullMethodName = "/Bestiary.BestiaryService/BestiaryUpdate"
-	BestiaryService_BestiaryDelete_FullMethodName = "/Bestiary.BestiaryService/BestiaryDelete"
-	BestiaryService_BestiaryLoad_FullMethodName   = "/Bestiary.BestiaryService/BestiaryLoad"
-	BestiaryService_MonsterCreate_FullMethodName  = "/Bestiary.BestiaryService/MonsterCreate"
-	BestiaryService_MonsterUpdate_FullMethodName  = "/Bestiary.BestiaryService/MonsterUpdate"
-	BestiaryService_MonsterDelete_FullMethodName  = "/Bestiary.BestiaryService/MonsterDelete"
-	BestiaryService_BestiaryGet_FullMethodName    = "/Bestiary.BestiaryService/BestiaryGet"
+	BestiaryService_BestiaryList_FullMethodName         = "/Bestiary.BestiaryService/BestiaryList"
+	BestiaryService_BestiaryGet_FullMethodName          = "/Bestiary.BestiaryService/BestiaryGet"
+	BestiaryService_BestiaryCreate_FullMethodName       = "/Bestiary.BestiaryService/BestiaryCreate"
+	BestiaryService_BestiaryUpdate_FullMethodName       = "/Bestiary.BestiaryService/BestiaryUpdate"
+	BestiaryService_BestiaryDelete_FullMethodName       = "/Bestiary.BestiaryService/BestiaryDelete"
+	BestiaryService_BestiaryPublicChange_FullMethodName = "/Bestiary.BestiaryService/BestiaryPublicChange"
+	BestiaryService_BestiaryLoad_FullMethodName         = "/Bestiary.BestiaryService/BestiaryLoad"
+	BestiaryService_MonsterCreate_FullMethodName        = "/Bestiary.BestiaryService/MonsterCreate"
+	BestiaryService_MonsterUpdate_FullMethodName        = "/Bestiary.BestiaryService/MonsterUpdate"
+	BestiaryService_MonsterDelete_FullMethodName        = "/Bestiary.BestiaryService/MonsterDelete"
 )
 
 // BestiaryServiceClient is the client API for BestiaryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BestiaryServiceClient interface {
+	BestiaryList(ctx context.Context, in *BLRequest, opts ...grpc.CallOption) (*BLResponse, error)
+	BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error)
 	BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*BCResponse, error)
 	BestiaryUpdate(ctx context.Context, in *BURequest, opts ...grpc.CallOption) (*BUResponse, error)
 	BestiaryDelete(ctx context.Context, in *BDRequest, opts ...grpc.CallOption) (*BDResponse, error)
+	BestiaryPublicChange(ctx context.Context, in *BPCRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 	BestiaryLoad(ctx context.Context, in *BLoadRequest, opts ...grpc.CallOption) (*BLoadResponse, error)
 	MonsterCreate(ctx context.Context, in *MCRequest, opts ...grpc.CallOption) (*MCResponse, error)
 	MonsterUpdate(ctx context.Context, in *MURequest, opts ...grpc.CallOption) (*MUResponse, error)
 	MonsterDelete(ctx context.Context, in *MDRequest, opts ...grpc.CallOption) (*MDResponse, error)
-	BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error)
 }
 
 type bestiaryServiceClient struct {
@@ -49,6 +53,26 @@ type bestiaryServiceClient struct {
 
 func NewBestiaryServiceClient(cc grpc.ClientConnInterface) BestiaryServiceClient {
 	return &bestiaryServiceClient{cc}
+}
+
+func (c *bestiaryServiceClient) BestiaryList(ctx context.Context, in *BLRequest, opts ...grpc.CallOption) (*BLResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BLResponse)
+	err := c.cc.Invoke(ctx, BestiaryService_BestiaryList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bestiaryServiceClient) BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BGResponse)
+	err := c.cc.Invoke(ctx, BestiaryService_BestiaryGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *bestiaryServiceClient) BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*BCResponse, error) {
@@ -75,6 +99,16 @@ func (c *bestiaryServiceClient) BestiaryDelete(ctx context.Context, in *BDReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BDResponse)
 	err := c.cc.Invoke(ctx, BestiaryService_BestiaryDelete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bestiaryServiceClient) BestiaryPublicChange(ctx context.Context, in *BPCRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, BestiaryService_BestiaryPublicChange_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,28 +155,20 @@ func (c *bestiaryServiceClient) MonsterDelete(ctx context.Context, in *MDRequest
 	return out, nil
 }
 
-func (c *bestiaryServiceClient) BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BGResponse)
-	err := c.cc.Invoke(ctx, BestiaryService_BestiaryGet_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BestiaryServiceServer is the server API for BestiaryService service.
 // All implementations must embed UnimplementedBestiaryServiceServer
 // for forward compatibility.
 type BestiaryServiceServer interface {
+	BestiaryList(context.Context, *BLRequest) (*BLResponse, error)
+	BestiaryGet(context.Context, *BGRequest) (*BGResponse, error)
 	BestiaryCreate(context.Context, *BCRequest) (*BCResponse, error)
 	BestiaryUpdate(context.Context, *BURequest) (*BUResponse, error)
 	BestiaryDelete(context.Context, *BDRequest) (*BDResponse, error)
+	BestiaryPublicChange(context.Context, *BPCRequest) (*EmptyResponse, error)
 	BestiaryLoad(context.Context, *BLoadRequest) (*BLoadResponse, error)
 	MonsterCreate(context.Context, *MCRequest) (*MCResponse, error)
 	MonsterUpdate(context.Context, *MURequest) (*MUResponse, error)
 	MonsterDelete(context.Context, *MDRequest) (*MDResponse, error)
-	BestiaryGet(context.Context, *BGRequest) (*BGResponse, error)
 	mustEmbedUnimplementedBestiaryServiceServer()
 }
 
@@ -153,6 +179,12 @@ type BestiaryServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBestiaryServiceServer struct{}
 
+func (UnimplementedBestiaryServiceServer) BestiaryList(context.Context, *BLRequest) (*BLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BestiaryList not implemented")
+}
+func (UnimplementedBestiaryServiceServer) BestiaryGet(context.Context, *BGRequest) (*BGResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BestiaryGet not implemented")
+}
 func (UnimplementedBestiaryServiceServer) BestiaryCreate(context.Context, *BCRequest) (*BCResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryCreate not implemented")
 }
@@ -161,6 +193,9 @@ func (UnimplementedBestiaryServiceServer) BestiaryUpdate(context.Context, *BUReq
 }
 func (UnimplementedBestiaryServiceServer) BestiaryDelete(context.Context, *BDRequest) (*BDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryDelete not implemented")
+}
+func (UnimplementedBestiaryServiceServer) BestiaryPublicChange(context.Context, *BPCRequest) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BestiaryPublicChange not implemented")
 }
 func (UnimplementedBestiaryServiceServer) BestiaryLoad(context.Context, *BLoadRequest) (*BLoadResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryLoad not implemented")
@@ -173,9 +208,6 @@ func (UnimplementedBestiaryServiceServer) MonsterUpdate(context.Context, *MURequ
 }
 func (UnimplementedBestiaryServiceServer) MonsterDelete(context.Context, *MDRequest) (*MDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MonsterDelete not implemented")
-}
-func (UnimplementedBestiaryServiceServer) BestiaryGet(context.Context, *BGRequest) (*BGResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BestiaryGet not implemented")
 }
 func (UnimplementedBestiaryServiceServer) mustEmbedUnimplementedBestiaryServiceServer() {}
 func (UnimplementedBestiaryServiceServer) testEmbeddedByValue()                         {}
@@ -196,6 +228,42 @@ func RegisterBestiaryServiceServer(s grpc.ServiceRegistrar, srv BestiaryServiceS
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BestiaryService_ServiceDesc, srv)
+}
+
+func _BestiaryService_BestiaryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BestiaryServiceServer).BestiaryList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BestiaryService_BestiaryList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BestiaryServiceServer).BestiaryList(ctx, req.(*BLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BestiaryService_BestiaryGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BGRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BestiaryServiceServer).BestiaryGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BestiaryService_BestiaryGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BestiaryServiceServer).BestiaryGet(ctx, req.(*BGRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _BestiaryService_BestiaryCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -248,6 +316,24 @@ func _BestiaryService_BestiaryDelete_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BestiaryServiceServer).BestiaryDelete(ctx, req.(*BDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BestiaryService_BestiaryPublicChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BPCRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BestiaryServiceServer).BestiaryPublicChange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BestiaryService_BestiaryPublicChange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BestiaryServiceServer).BestiaryPublicChange(ctx, req.(*BPCRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -324,24 +410,6 @@ func _BestiaryService_MonsterDelete_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BestiaryService_BestiaryGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BGRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BestiaryServiceServer).BestiaryGet(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BestiaryService_BestiaryGet_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BestiaryServiceServer).BestiaryGet(ctx, req.(*BGRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BestiaryService_ServiceDesc is the grpc.ServiceDesc for BestiaryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -349,6 +417,14 @@ var BestiaryService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Bestiary.BestiaryService",
 	HandlerType: (*BestiaryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "BestiaryList",
+			Handler:    _BestiaryService_BestiaryList_Handler,
+		},
+		{
+			MethodName: "BestiaryGet",
+			Handler:    _BestiaryService_BestiaryGet_Handler,
+		},
 		{
 			MethodName: "BestiaryCreate",
 			Handler:    _BestiaryService_BestiaryCreate_Handler,
@@ -360,6 +436,10 @@ var BestiaryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BestiaryDelete",
 			Handler:    _BestiaryService_BestiaryDelete_Handler,
+		},
+		{
+			MethodName: "BestiaryPublicChange",
+			Handler:    _BestiaryService_BestiaryPublicChange_Handler,
 		},
 		{
 			MethodName: "BestiaryLoad",
@@ -376,10 +456,6 @@ var BestiaryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MonsterDelete",
 			Handler:    _BestiaryService_MonsterDelete_Handler,
-		},
-		{
-			MethodName: "BestiaryGet",
-			Handler:    _BestiaryService_BestiaryGet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

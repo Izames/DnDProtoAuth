@@ -37,7 +37,7 @@ const (
 type BestiaryServiceClient interface {
 	BestiaryList(ctx context.Context, in *BLRequest, opts ...grpc.CallOption) (*BLResponse, error)
 	BestiaryGet(ctx context.Context, in *BGRequest, opts ...grpc.CallOption) (*BGResponse, error)
-	BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*BCResponse, error)
+	BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
 	BestiaryUpdate(ctx context.Context, in *BURequest, opts ...grpc.CallOption) (*BUResponse, error)
 	BestiaryDelete(ctx context.Context, in *BDRequest, opts ...grpc.CallOption) (*BDResponse, error)
 	BestiaryPublicChange(ctx context.Context, in *BPCRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
@@ -75,9 +75,9 @@ func (c *bestiaryServiceClient) BestiaryGet(ctx context.Context, in *BGRequest, 
 	return out, nil
 }
 
-func (c *bestiaryServiceClient) BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*BCResponse, error) {
+func (c *bestiaryServiceClient) BestiaryCreate(ctx context.Context, in *BCRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BCResponse)
+	out := new(EmptyResponse)
 	err := c.cc.Invoke(ctx, BestiaryService_BestiaryCreate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -161,7 +161,7 @@ func (c *bestiaryServiceClient) MonsterDelete(ctx context.Context, in *MDRequest
 type BestiaryServiceServer interface {
 	BestiaryList(context.Context, *BLRequest) (*BLResponse, error)
 	BestiaryGet(context.Context, *BGRequest) (*BGResponse, error)
-	BestiaryCreate(context.Context, *BCRequest) (*BCResponse, error)
+	BestiaryCreate(context.Context, *BCRequest) (*EmptyResponse, error)
 	BestiaryUpdate(context.Context, *BURequest) (*BUResponse, error)
 	BestiaryDelete(context.Context, *BDRequest) (*BDResponse, error)
 	BestiaryPublicChange(context.Context, *BPCRequest) (*EmptyResponse, error)
@@ -185,7 +185,7 @@ func (UnimplementedBestiaryServiceServer) BestiaryList(context.Context, *BLReque
 func (UnimplementedBestiaryServiceServer) BestiaryGet(context.Context, *BGRequest) (*BGResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryGet not implemented")
 }
-func (UnimplementedBestiaryServiceServer) BestiaryCreate(context.Context, *BCRequest) (*BCResponse, error) {
+func (UnimplementedBestiaryServiceServer) BestiaryCreate(context.Context, *BCRequest) (*EmptyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BestiaryCreate not implemented")
 }
 func (UnimplementedBestiaryServiceServer) BestiaryUpdate(context.Context, *BURequest) (*BUResponse, error) {

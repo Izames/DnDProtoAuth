@@ -7,7 +7,7 @@ package Bestiary;
 service BestiaryService {
   rpc BestiaryList (BLRequest) returns (BLResponse);
   rpc BestiaryGet (BGRequest) returns (BGResponse);
-  rpc BestiaryCreate (BCRequest) returns (BCResponse);
+  rpc BestiaryCreate (BCRequest) returns (EmptyResponse);
   rpc BestiaryUpdate (BURequest) returns (BUResponse);
   rpc BestiaryDelete (BDRequest) returns (BDResponse);
   rpc BestiaryPublicChange (BPCRequest) returns (EmptyResponse);
@@ -51,10 +51,6 @@ message BLResponse {
 message BCRequest {
   string name = 1;
   string token = 2;
-}
-
-message BCResponse {
-  int64 id = 1;
 }
 
 //изменение бестиария
